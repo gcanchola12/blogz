@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<body>
+    <h2>Add a Post</h2>
+    <form method='post'>
+    <ul>
+        <li><label>Title:</li> 
+            <li><input style="width:500px" type="text" name="title"/></label></li>
+        <li><label>Body:</li>
+        <li><input style="height:200px; width:500px" type="text" name="body"/></label></li>
+        <a><li><input type="submit" value="submit post" /></li></a>
+    </ul>
+    
+    </form>
+    
+{% endblock %}
+
+

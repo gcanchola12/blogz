@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Build-a-Blog</title>
+        <style>
+
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .nav_links {
+                margin:10px
+            }
+        
+            ul {
+                list-style: none;
+            }
+
+            li {
+                margin: 5px;
+            }
+
+        </style>
+    </head>
+<body>
+<h1 style="margin: 10px">My Blog</h1>
+        <div>
+            <a class="nav_links" href='/blog'>View All Posts</a>
+            <a class="nav_links" href='/newpost'>Add a New Blogpost</a>
+        </div>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
