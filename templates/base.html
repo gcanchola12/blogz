@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Build-a-Blog</title>
+        <title>Blogz</title>
         <style>
 
             body{
@@ -23,10 +23,15 @@
         </style>
     </head>
 <body>
-<h1 style="margin: 10px">My Blog</h1>
+    <h1>My Blogz</h1>
+        </ul>
+    
         <div>
-            <a class="nav_links" href='/blog'>View All Posts</a>
-            <a class="nav_links" href='/newpost'>Add a New Blogpost</a>
+            <a class="nav_links" href='/index'>Home</a>
+            <a class="nav_links" href='/blog'>All Posts</a>
+            <a class="nav_links" href='/newpost'>Add a New Post</a>
+            <a class="nav_links" style="float: right" href='/logout'>Logout</a>
+            <a class="nav_links" style="float: right" href='/login'>Login</a>
         </div>
 
     {% block content %}

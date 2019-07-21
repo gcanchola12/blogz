@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h2 style="margin: 10px; margin-top: 20px">All Posts</h2>
+
+    {% if blogs|length == 0 %}
+    <h3>No blogposts yet</h3>
+    <a href="/newpost">Write your first post!</a>
+
+    {% else %}
+    {% for blog in blogs %}
+    
+    <ul>
+       <a href="/blogpost?id={{blog.id}}/{{blog.title}}"> <li>{{blog.title}}</li></a>
+    </ul>
+    {% endfor %}
+    {% endif %}  
+
+   
+{% endblock %}

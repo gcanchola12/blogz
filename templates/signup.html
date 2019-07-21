@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<html>
+    <body>
+      <h1>Signup</h1>
+
+      {% with messages = get_flashed_messages(with_categories=True) %}
+        <ul>
+        {% for category,message in messages %}
+            <li class="{{category}}">{{message}}</li>
+        {% endfor %}
+        </ul>
+    {% endwith %}
+    
+      <form action="/signup" method="post">
+      <table>
+        <tbody>
+            <tr>
+              <td><label>Username</label></td>
+              <td><input type="text" name="username" value={{username}}></td>
+              <td><span class="error">{{username_error}}</span></td>
+            </tr>
+          
+            <tr>
+              <td><label>Password</label></td>
+              <td><input type="password" name="password"></td>
+              <td><span class="error">{{password_error}}</span></td>
+            </tr>
+
+            <tr>
+              <td><label>Verify Password</label></td>
+              <td><input type="password" name="verify">
+              <td><span class="error">{{verify_error}}</span></td>
+            </tr>
+
+         </tbody>
+       </table>
+
+      <input type="submit">
+    </form>
+
+{% endblock %}
