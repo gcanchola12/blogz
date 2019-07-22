@@ -3,18 +3,20 @@
 
     <h2 style="margin: 10px; margin-top: 20px">All Posts</h2>
 
-    {% if blogs|length == 0 %}
-    <h3>No blogposts yet</h3>
-    <a href="/newpost">Write your first post!</a>
+    {% if user_blogs|length == 0 %}
+    <h3>This author has not written any posts yet</h3>
+    <a href="/">Read Posts by other Authers!</a>
 
     {% else %}
-    {% for blog in blogs %}
+    {% for user_blog in user_blogs %}
     
     <ul>
-       <a href="/blogpost?id={{blog.id}}/{{blog.title}}"> <li>{{blog.title}}</li></a>
+       <a href="/blogpost?id={{user_blog.id}}/{{user_blog.title}}"> <li>{{user_blog.title}}</li></a>
     </ul>
     {% endfor %}
     {% endif %}  
 
    
 {% endblock %}
+
+

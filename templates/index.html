@@ -1,10 +1,19 @@
 {% extends "base.html" %}
-
 {% block content %}
 
-    <h2>{{blogpost.title}}</h2>
-    <p>
-        {{blogpost.body}}
-    </p>
-     <div>Author: <a href="">{{blogpost.owner}}</a></div>
+    <h2 style="margin: 10px; margin-top: 20px">All Users</h2>
+
+    {% if users|length == 0 %}
+    <h3>No users have joined yet</h3>
+    <a href="/signup">Be the first to write!</a>
+
+    {% else %}
+    {% for user in users %}
+    <ul>
+       <a href="/singleuser?id={{user.id}}"> <li>{{user.username}}</li></a>
+    </ul>
+    {% endfor %}
+    {% endif %}  
+
+   
 {% endblock %}

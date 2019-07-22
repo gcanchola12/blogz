@@ -31,18 +31,23 @@ class User(db.Model):
         self.username = username
         self.password = password
 
-
-@app.route('/')
-def index():
-    blogs = Blog.query.all()
-    return render_template('blog.html',title="My Blog!", blogs=blogs)
-        
-
 @app.before_request
 def require_login():
     allowed_routes = ['login', 'signup', 'all_blogposts', 'index',]
     if request.endpoint not in allowed_routes and 'username' not in session:
         return redirect('/login')
+
+@app.route('/')
+def index():
+    users = User.query.all()
+    return render_template('index.html',title="All Users", users=users)
+
+@app.route('/singleuser')
+def single_user():
+    owner_id = request.args.get('id')
+    user_blogs = Blog.query.filter_by(owner_id=owner_id).all()
+    blogs = Blog.query.all()
+    return render_template('singleuser.html', user_blogs=user_blogs)
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -54,9 +59,8 @@ def login():
         user = User.query.filter_by(username=username).first()
 
         if not user:
-            return '<h1>User does not exist</h1>'
+           return '<h1>User does not exist, please <a href="/signup">signup</a> for an account</h1>'
             
-
         if user.password != password:
             flash('incorrect password')
             
@@ -128,7 +132,15 @@ def logout():
 @app.route('/blog')
 def all_blogposts():
     blogs = Blog.query.all()
+    
     return render_template('blog.html',title="My Blog!", blogs=blogs)
+
+@app.route('/blogpost')
+def single_blogpost():
+    blogpost_id = request.args.get('id')
+    blogpost = Blog.query.filter_by(id=blogpost_id).first()
+    user = User.query.filter_by(id=blogpost.owner_id).first()
+    return render_template('blogpost.html', blogpost=blogpost, user=user)
 
 
 @app.route('/newpost', methods=['POST', 'GET'])
@@ -149,13 +161,6 @@ def new_post():
             return redirect('/blogpost?id={}'.format(new_post.id))
         
     return render_template('newpost.html')
-
-
-@app.route('/blogpost')
-def single_blogpost():
-    blogpost_id = request.args.get('id')
-    blogpost = Blog.query.filter_by(id=blogpost_id).first()
-    return render_template('blogpost.html', blogpost=blogpost)
 
 
 if __name__ == '__main__':
